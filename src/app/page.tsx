@@ -52,11 +52,76 @@ function House() {
         />
       </mesh>
 
+      {/* Main Left First Floor Pillar */}
+      <mesh position={[-1.15, 0.7, 1]} castShadow receiveShadow>
+        <boxGeometry args={[0.3, 4, 3.6]} />
+        <meshStandardMaterial
+          color="#f5f5f5"
+          roughness={0.7}
+          metalness={0.1}
+        />
+      </mesh>
+
+      {/* Main Right First Floor Pillar */}
+      <mesh position={[0.16, 0.7, 1]} castShadow receiveShadow>
+        <boxGeometry args={[0.3, 4, 3.6]} />
+        <meshStandardMaterial
+          color="#f5f5f5"
+          roughness={0.7}
+          metalness={0.1}
+        />
+      </mesh>
+
+      {/* Glass Window Main First Floor Pillar */}
+      <mesh position={[-0.5, 0.7, 2.6]}>
+        <boxGeometry args={[0.96, 4, 0.02]} />
+        <meshPhysicalMaterial
+          color="#a0c4ff"
+          transparent
+          opacity={0.4}
+          roughness={0.1}
+          metalness={0.9}
+          transmission={0.9}
+          thickness={0.1}
+          envMapIntensity={1.5}
+        />
+      </mesh>
+
       {/* Second Floor - Offset */}
       <mesh position={[1.4, 1.9, -0.2]} castShadow receiveShadow>
         <boxGeometry args={[5, 4, 1.5]} />
         <meshStandardMaterial
           color="#e8e8e8"
+          roughness={0.7}
+          metalness={0.1}
+        />
+      </mesh>
+
+      {/* Left Second Floor Pillar */}
+      <mesh position={[-0.76, 1.9, -0.2]} castShadow receiveShadow>
+        <boxGeometry args={[0.7, 4, 3]} />
+        <meshStandardMaterial
+          color="#f5f5f5"
+          roughness={0.7}
+          metalness={0.1}
+        />
+      </mesh>
+
+      {/* Right Second Floor Pillar */}
+      <mesh position={[3.556, 1.9, -0.2]} castShadow receiveShadow>
+        <boxGeometry args={[0.7, 4, 3]} />
+        <meshStandardMaterial
+          color="#f5f5f5"
+          roughness={0.7}
+          metalness={0.1}
+        />
+      </mesh>
+
+      {/* Flat Roof Overhang - SEcond Floor */}
+      <mesh position={[1.4, 4, -0.2]} castShadow>
+        <boxGeometry args={[5, 0.25, 2.99]} />
+        <meshStandardMaterial
+          color="#f5f5f5"
           roughness={0.7}
           metalness={0.1}
         />
@@ -71,7 +136,37 @@ function House() {
           metalness={0.2}
         />
       </mesh>
-      
+
+      {/* Front Door Overhang Window Pane */}
+      <mesh position={[1.15, 1.7, 2.5]}>
+        <boxGeometry args={[1.69, 0.5, 0.02]} />
+        <meshPhysicalMaterial
+          color="#a0c4ff"
+          transparent
+          opacity={0.4}
+          roughness={0.1}
+          metalness={0.9}
+          transmission={0.9}
+          thickness={0.1}
+          envMapIntensity={1.5}
+        />
+      </mesh>
+
+      {/* Side Door Overhang Window Pane */}
+      <mesh position={[1.95, 1.7, 2]}>
+        <boxGeometry args={[0.08, 0.5, 1]} />
+        <meshPhysicalMaterial
+          color="#a0c4ff"
+          transparent
+          opacity={0.4}
+          roughness={0.1}
+          metalness={0.9}
+          transmission={0.9}
+          thickness={0.1}
+          envMapIntensity={1.5}
+        />
+      </mesh>
+
       {/* Garage - Proper Alignment */}
       <group position={[3.2, 0.55, 0]}>
         {/* Garage body */}

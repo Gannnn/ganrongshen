@@ -412,13 +412,7 @@ function House({ setShowResume }: { setShowResume: (v: boolean) => void }) {
         color="#3b2b1a"
         anchorX="center"
         anchorY="middle"
-        bevelEnabled
-        bevelThickness={0.002}
-        bevelSize={0.001}
-        bevelOffset={0}
-        bevelSegments={3}
         outlineWidth={0}
-        toneMapped={false}
       >
         Gan’s Residence
       </Text>
@@ -430,7 +424,6 @@ function House({ setShowResume }: { setShowResume: (v: boolean) => void }) {
         color="#e5c285"            // lighter, glowing-gold tone that contrasts wood
         anchorX="center"
         anchorY="middle"
-        toneMapped={false}
         outlineWidth={0.006}
         outlineColor="#3b2b1a"
       >
@@ -514,9 +507,7 @@ function AtmosphericParticles() {
       <bufferGeometry>
         <bufferAttribute
           attach="attributes-position"
-          count={count}
-          array={positions}
-          itemSize={3}
+          args={[positions, 3]}
         />
       </bufferGeometry>
       <pointsMaterial

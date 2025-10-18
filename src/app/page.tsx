@@ -559,8 +559,9 @@ function Terrain() {
 function SceneContent({ scrollProgress, showResume, setShowResume }: 
   { scrollProgress: number; showResume: boolean; setShowResume: (v: boolean) => void }) {
   
-  const { camera } = useThree();
+  const { camera, size } = useThree();
   const lightRef = useRef<THREE.DirectionalLight>(null);
+  const isMobile = size.width < 768;
 
   useFrame(() => {
     // Smooth zoom to TV if clicked
@@ -569,9 +570,12 @@ function SceneContent({ scrollProgress, showResume, setShowResume }:
       camera.position.lerp(targetPos, 0.05);
       camera.lookAt(-1.6, 0.45, 2.0);
     } else {
-      // Default scroll movement
-      camera.position.y = 2 + scrollProgress * 3;
-      camera.position.z = 8 - scrollProgress * 2;
+      // Responsive default camera position
+      const baseCameraZ = isMobile ? 12 : 8;
+      const baseCameraY = isMobile ? 3 : 2;
+      
+      camera.position.y = baseCameraY + scrollProgress * 3;
+      camera.position.z = baseCameraZ - scrollProgress * 2;
       camera.lookAt(0, scrollProgress * 2, 0);
     }
 

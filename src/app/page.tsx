@@ -9,6 +9,7 @@ import * as THREE from 'three';
 function House({ setShowResume }: { setShowResume: (v: boolean) => void }) {
   const groupRef = useRef<THREE.Group>(null);
   const windowGlowRefs = useRef<THREE.PointLight[]>([]);
+  const fontScale = window.innerWidth < 768 ? 1.5 : 1;
 
   useFrame((state) => {
     if (groupRef.current) {
@@ -405,10 +406,11 @@ function House({ setShowResume }: { setShowResume: (v: boolean) => void }) {
         </mesh>
 
       {/* Carved Wooden Text */}
+
       <Text
-        position={[0, 0.92, 2.06]}
+        position={[0, 1.0, 2.06]}
+        fontSize={0.12 * fontScale}
         rotation={[0, 0, 0]}
-        fontSize={0.12}
         color="#3b2b1a"
         anchorX="center"
         anchorY="middle"
@@ -419,12 +421,12 @@ function House({ setShowResume }: { setShowResume: (v: boolean) => void }) {
 
       <Text
         position={[0, 0.8, 2.065]}
+        fontSize={0.11 * fontScale}
         rotation={[0, 0, 0]}
-        fontSize={0.085}
-        color="#e5c285"            // lighter, glowing-gold tone that contrasts wood
+        color="#3b2b1a"
         anchorX="center"
         anchorY="middle"
-        outlineWidth={0.006}
+        outlineWidth={0.004}
         outlineColor="#3b2b1a"
       >
         Click Me!
@@ -563,6 +565,11 @@ function SceneContent({ scrollProgress, showResume, setShowResume }:
   const lightRef = useRef<THREE.DirectionalLight>(null);
   const isMobile = size.width < 768;
 
+  const baseCameraZ = isMobile ? 14 : 8;  // zoom out more on mobile
+  const baseCameraY = isMobile ? 4 : 2.5;
+  camera.position.y = baseCameraY + scrollProgress * 3;
+  camera.position.z = baseCameraZ - scrollProgress * 2;
+
   useFrame(() => {
     // Smooth zoom to TV if clicked
     if (showResume) {
@@ -570,9 +577,8 @@ function SceneContent({ scrollProgress, showResume, setShowResume }:
       camera.position.lerp(targetPos, 0.05);
       camera.lookAt(-1.6, 0.45, 2.0);
     } else {
-      // Responsive default camera position
-      const baseCameraZ = isMobile ? 12 : 8;
-      const baseCameraY = isMobile ? 3 : 2;
+      const baseCameraZ = isMobile ? 18 : 8;
+      const baseCameraY = isMobile ? 4 : 2.2;
       
       camera.position.y = baseCameraY + scrollProgress * 3;
       camera.position.z = baseCameraZ - scrollProgress * 2;
@@ -661,37 +667,40 @@ export default function CinematicPortfolio() {
             opacity: 1 - scrollProgress * 0.5
           }}
         />
-        
-        {/* Top left branding */}
+
+        {/* Top Left Branding */}
         <div 
-          className="absolute top-8 left-8 z-20 transition-all duration-700"
+          className="absolute top-6 left-4 md:top-8 md:left-8 z-20 text-left"
           style={{ 
+            transform: `scale(${window.innerWidth < 768 ? 0.8 : 1})`,
+            transformOrigin: 'top left',
             opacity: 1 - scrollProgress * 2,
-            transform: `translateY(${scrollProgress * -50}px)`
+            transition: 'transform 0.3s ease'
           }}
         >
-          <h1 className="text-3xl md:text-5xl font-bold tracking-wider mb-2" style={{ fontFamily: 'monospace' }}>
+          <h1 className="text-2xl md:text-5xl font-bold tracking-wider mb-2 font-mono">
             RONGSHEN
           </h1>
-          <div className="text-xs text-gray-400 space-y-0.5" style={{ fontFamily: 'monospace' }}>
+          <div className="text-[10px] md:text-xs text-gray-400 font-mono">
             <p>// Copyright © 2025</p>
             <p>Gan Rong Shen</p>
             <p>All Rights Reserved.</p>
           </div>
         </div>
-        
+
         {/* Top right manifesto */}
         <div 
-          className="absolute top-8 right-8 z-20 text-right max-w-xs transition-all duration-700"
+          className="absolute top-6 right-4 md:top-8 md:right-8 z-20 text-right max-w-[140px] md:max-w-xs"
           style={{ 
-            opacity: 1 - scrollProgress * 2,
-            transform: `translateY(${scrollProgress * -50}px)`
+            transform: `scale(${window.innerWidth < 768 ? 0.85 : 1})`,
+            transformOrigin: 'top right',
+            opacity: 1 - scrollProgress * 2
           }}
         >
-          <h2 className="text-xs md:text-sm font-bold mb-2 text-gray-400" style={{ fontFamily: 'monospace' }}>
+          <h2 className="text-[10px] md:text-sm font-bold mb-2 text-gray-400 font-mono">
             ////// Manifesto
           </h2>
-          <p className="text-[10px] md:text-xs text-gray-400 leading-relaxed" style={{ fontFamily: 'monospace' }}>
+          <p className="text-[9px] md:text-xs text-gray-400 leading-relaxed font-mono">
             Building the future of immersive web experiences, one pixel at a time...
           </p>
         </div>
